@@ -1,0 +1,20 @@
+<!--Spawns a Turtlebot with Hokuyu Lidar-->
+<launch>
+ 
+  <arg name="init_pose"/>
+ <param name="robot_description" command="$(find xacro)/xacro.py '$(find ecobot)/data/includes/urdf/Turtlebot_Kinect_Lidar.urdf.xacro'"/>
+  <node pkg="gazebo_ros" type="spawn_model" name="turtlebot_model" 
+        args="$(arg init_pose) -unpause -urdf -param robot_description -model mobile_base" respawn="false">
+  </node>
+ 
+   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+   <param name="publish_frequency" type="double" value="30.0" />
+   <param name="use_tf_static" type="bool" value="false" />
+   </node>
+</launch>
+
+
+
+
+
+
